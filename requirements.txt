@@ -33,6 +33,7 @@ jupyter==1.0.0
 jupyter-client==5.2.2
 jupyter-console==5.2.0
 jupyter-core==4.4.0
+Keras==2.1.5
 Markdown==2.6.11
 MarkupSafe==1.0
 mistune==0.8.3
@@ -59,6 +60,7 @@ pyzmq==17.0.0
 qtconsole==4.3.1
 requests==2.10.0
 scikit-learn==0.19.1
+scipy==1.0.1
 Send2Trash==1.5.0
 simplegeneric==0.8.1
 six==1.11.0

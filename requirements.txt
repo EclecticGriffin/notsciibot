@@ -5,4 +5,4 @@ scipy
 jupyter
 pandas
 gym
-universe
+gym[atari]

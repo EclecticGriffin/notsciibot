@@ -366,6 +366,8 @@ which produced dynamic behavior in real time. This was encouraging
 as the lander would rapidly seem to develop a good baseline policy,
 however, it would never converge to something successful.
 
+![constant training](assets/learning_to_balance.gif)
+
 We also implemented a batch based training method that tasked the
 critic with learning the discounted temporal rewards across a batch
 similar to how the original policy gradient worked. The continuous
@@ -377,6 +379,8 @@ rewards we again encountered the problem of local optima causing
 searching to stop. The agent would frequently choose to just fire
 a single thruster and crash into the ground as the probability of
 all other actions was reduced to near zero.
+
+![fire single thruster](assets/stupid_robot.gif)
 
 This immediately made clear the utility of adding entropy encouragement
 this changed the network behavior significantly and often enabled

@@ -2,5 +2,5 @@ numpy
 tensorflow
 jupyter
 gym
-gym['atari']
-gym['Box2D']
+atari-py
+box2d

@@ -1,8 +1,6 @@
 numpy
 tensorflow
-keras
-scipy
 jupyter
-pandas
 gym
-gym[atari]
+gym['atari']
+gym['Box2D']

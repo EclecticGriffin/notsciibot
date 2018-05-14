@@ -2,5 +2,5 @@ numpy
 tensorflow
 jupyter
 gym
-gym['atari']
-gym['Box2D']
+gym[atari]
+gym[Box2D]

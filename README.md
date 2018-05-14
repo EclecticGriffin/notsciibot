@@ -366,7 +366,7 @@ which produced dynamic behavior in real time. This was encouraging
 as the lander would rapidly seem to develop a good baseline policy,
 however, it would never converge to something successful.
 
-![constant training](assets/learning_to_balance.gif)
+![constant training](assets/l2b.gif)
 
 We also implemented a batch based training method that tasked the
 critic with learning the discounted temporal rewards across a batch

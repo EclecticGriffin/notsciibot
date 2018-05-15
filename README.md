@@ -6,51 +6,51 @@
 ### Problem Motivation
 Deep learning has seen success in many supervised learning domains,
 which has naturally spurred investigation of other potential applications.
-Reinforcement learning (RL) has been of particular interest, because it
+Reinforcement learning (RL) has been of particular interest because it
 represents a common class of problems, yet ones that are decidedly
 unsolved.
 
 RL is also immediately interesting because it frequently means
-competition with machines in our own domain, games. Put simply
+competition with machines in our own domain: games. Put simply,
 reinforcement learning presents an agent with an environment in
 which it must take actions that have some (often unclear) relation
 to an eventual reward. The agent must learn what actions to take
 in order to effectively navigate the environment and maximize reward.
 
-This differs from supervised learning, because while the objective is
-clear, the path isn't. We often don't know the best strategy and so
-can't train a network to reproduce it, though if some simple strategies
-exist they could be used a base point. In general though, we can
-tell when a network is succeeding in a task, but not how to get it to
-succeed. Framed this way, the task is a search through potential
-action / policy space in order to find a maximally effective policy.
+This differs from supervised learning because while the objective is
+clear, the path isn't. We often don't know the best strategy, so
+can't train a network to reproduce it. Though if some simple strategies
+exist, they could be used as a base point. In general, though, we can
+tell when a network is succeeding in a task but not how to get it to
+succeed. Framed this way, the task is a search through the action/policy space
+in order to find a maximally effective policy.
 
-RL is frequently applied to games (chess, go, Atari, ect.) not
-because this is the only application of these techniques---if anything
-this is perhaps the most mundane way they could be used---but rather
+RL is frequently applied to games (chess, go, Atari, etc.) not
+because it's the only application of these techniques — if anything
+this is perhaps the most mundane way it could be used — but rather
 because these are all spaces that can be effectively simulated. This
-allows for environments to be standardized, explored, and, most
-importantly, shared. RL agents are going to make mistakes, and it's
+allows for environments to be standardized, explored, and (most
+importantly) shared. RL agents are going to make mistakes, and it's
 perfectly acceptable if these mistakes occur in a simulation, but
-far more problematic when they occur in the real world, as with an
+they're far more problematic when they occur in the real world, as with an
 autonomous vehicle.
 
-With that in mind, OpenAi created a python library call Gym that allows
+With that in mind, OpenAi created a python library called Gym that allows
 for easy access to many of these simulated environments with the goal
 of acting as a training ground for RL techniques.
 
 *Mnih, V., et al (2015). Human-level control through deep
-reinforcement learning. Nature, 518(7540), 529.* Showed that is
+reinforcement learning. Nature, 518(7540), 529.* showed that it
 was possible to attain human-level or better performance in many
 Atari games through Deep Q-Networks. The results of this paper were
 very exciting, not only because of the success seen, but also the
 domain of the input. The agent was given only visual information
-and the game score, the exact things that a human player would
+and the game score — the exact things that a human player would
 have access to.
 
 These results are from 2015 and relied on a value-based approach.
-Since then, there has been plenty of work with policy based
-approaches, naturally we wanted to try them.
+Since then, there has been plenty of work with policy-based
+approaches, so naturally we wanted to try them.
 
 ###### Our Goal:
 **Attempt to replicate these results using policy methods**
@@ -59,16 +59,16 @@ approaches, naturally we wanted to try them.
 ### A Brief Survey of Reinforcment Learning
 #### Q-Network and Value-based versus Policy-based methods
 
-At the moment there are two broad categories of approaches to RL
-problems, value-based and policy-based. Value based approaches
+At the moment, there are two broad categories of approaches to RL
+problems: value-based and policy-based. Value-based approaches
 predict expected reward based on actions and states. They can be
 used to model which of the many paths is expected to generate the
 most reward.
 
-Note however, that value-based methods are really an attempt to model
+Note, however, that value-based methods are really an attempt to model
 the reward function of the environment and actually say nothing about
 what the agent should *do*. Given a perfect reward function, the
-optimal policy could be derived maximize the total reward obtained;
+optimal policy could be derived to maximize the total reward obtained;
 however, given that the reward function is seldom going to be perfect,
 we can't be sure that any policy derived from it is optimal.
 
@@ -78,16 +78,16 @@ offers the greatest reward. It's easy to see how this policy could
 go wrong, as the best choice at any given step is not necessarily
 the best across an entire episode in the environment.
 
-To that end one could implement an epsilon-greedy strategy, which
-defers to a random action some amount of the time, and this can
-be good for exploration, but feels somewhat unsound given the
+To that end, one could implement an epsilon-greedy strategy, which
+defers to a random action some amount of the time. This can
+be good for exploration but feels somewhat unsound given the
 information derived from the model.
 
-Deep Q-Networks attempt to solve the problem of shortsighted greedy
+Deep Q-Networks attempt to solve the problem of shortsighted, greedy
 actions and can be made deterministic or semi-stochastic as one
 sees fit. In essence, a Q-Network propagates rewards backward in time
-to try to associate actions with low immediate reward with later
-states that produce high reward.
+to try to associate actions that have low immediate rewards with later
+states that produce high reward to give the agent from "foresight".
 
 In practice, as demonstrated with the Atari environments, this can be
 quite effective, as long as the agent is encouraged to explore
@@ -120,7 +120,7 @@ environment.
 It is this approach that we wanted to take with these environments.
 
 #### Simple Policy Gradient Approach
-Unlike our value based networks, a policy based approach will be
+Unlike our value-based networks, a policy-based approach will be
 inherently stochastic, which automatically sidesteps the issue of
 state aliasing. It also means that rather than output a single
 real value for a given state, our network will instead produce
@@ -253,8 +253,8 @@ By now you might have realized an issue with all the described
 approaches, and it is one that is a core problem of RL. The
 entire problem is a search, where accessible states are determined
 by the current state, which makes navigating the search space
-particularly challenging. In order for a network, either value or
-policy based, to learn of a new better path, it must first stumble
+particularly challenging. In order for a network, either value- or
+policy-based, to learn of a new better path, it must first stumble
 onto the path. This means that while there may be a far better policy
 available, the network may never encounter it because it is too far
 away of inaccessible.

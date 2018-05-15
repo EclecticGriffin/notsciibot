@@ -389,8 +389,8 @@ all other actions was reduced to near zero.
 
 ![fire single thruster](assets/stupid_robot.gif)
 
-This immediately made clear the utility of adding entropy encouragement
-this changed the network behavior significantly and often enabled
+This immediately made clear the utility of adding entropy encouragement.
+This changed the network behavior significantly and often enabled
 it to escape or avoid these sorts of local optima; however, the
 agent, while often close to desired behavior, would occasionally
 exhibit extreme volatility and generally failed to learn that it
@@ -406,7 +406,7 @@ positive episode was the result of luck or a chance alignment
 rather than a successful policy.
 
 Though our original goal was to apply these methods to the atari
-library the fact that the actor critic model failed to solve
+library, the fact that the actor critic model failed to solve
 the lunar lander environment gave us pause. It seemed better
 to hone the approach in a simpler environment first, before
 returning to the more complex breakout environment.
@@ -418,16 +418,16 @@ many hyperparameters that affect the way the agent searches the
 policy space with little indication of how to set them. If entropy
 is encouraged too much the agent is effectively random, but if
 it is not encouraged enough the agent falls into local minima. If
-finding the goldilocks zone for entropy isn't challenging enough
-the there are a myriad of ways that the network could be structured
+finding the goldilocks zone for entropy isn't challenging enough,
+then there are a myriad of ways that the network could be structured
 and loss computed all of which ultimately change the search
 functionality.
 
 With limited resources and little direction we were effectively
 doing a random search of possible designs, so it is unsurprising
 that we were unable to obtain an optimal agent; however, given
-some of the emergent behavior there is no reason to believe that
-the task is impossible, just challenging.
+some of the emergent behavior, there is no reason to believe that
+the task is impossible — just challenging.
 
 ---
 
@@ -443,7 +443,7 @@ Python 3.5
 
 #### Using the Notebooks
 Each of the notebooks corresponds to a single environment and the
-experiment on which we had the most success. The notebooks are
+experiment with which we had the most success. The notebooks are
 designed to be run sequentially for setup, then the training
 functions may be executed and tweaked as desired. Results
 can be printed out with verbosity flags. And the environment
@@ -451,7 +451,7 @@ may also be rendered during training, though this will
 frequently cause the environment to behave slowly.
 
 The handler class in the notebooks can handle saving and loading
-the model so that trained versions may be retrieved and there is
+the model so that trained versions may be retrieved. There is
 documentation regarding their use within the notebooks themselves.
 
 In general, the notebooks are heavily commented to make their

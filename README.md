@@ -5,14 +5,14 @@
 
 ### Problem Motivation
 Deep learning has seen success in many supervised learning domains,
-which has naturally spurred investigation of other problem domains.
+which has naturally spurred investigation of other potential applications.
 Reinforcement learning (RL) has been of particular interest, because it
 represents a common class of problems, yet ones that are decidedly
 unsolved.
 
 RL is also immediately interesting because it frequently means
 competition with machines in our own domain, games. Put simply
-renforcement learning presents an agent with an environment in
+reinforcement learning presents an agent with an environment in
 which it must take actions that have some (often unclear) relation
 to an eventual reward. The agent must learn what actions to take
 in order to effectively navigate the environment and maximize reward.
@@ -23,8 +23,7 @@ can't train a network to reproduce it, though if some simple strategies
 exist they could be used a base point. In general though, we can
 tell when a network is succeeding in a task, but not how to get it to
 succeed. Framed this way, the task is a search through potential
-action / policy space in order to find something to maximize expected
-reward.
+action / policy space in order to find a maximally effective policy.
 
 RL is frequently applied to games (chess, go, Atari, ect.) not
 because this is the only application of these techniques---if anything
@@ -123,7 +122,7 @@ It is this approach that we wanted to take with these environments.
 #### Simple Policy Gradient Approach
 Unlike our value based networks, a policy based approach will be
 inherently stochastic, which automatically sidesteps the issue of
-state aliasing, it also means that rather than output a single
+state aliasing. It also means that rather than output a single
 real value for a given state, our network will instead produce
 a probability distribution across the action space. To determine
 what action to take, this distribution can be sampled.
@@ -133,7 +132,7 @@ highly unbalanced probability distributions, we can say that the
 network is highly confident of the action that should be taken
 in that state, while for more uniform distributions, the network
 can be said to be uncertain or indifferent to the action chosen.
-While, that is a personified reading of the network behavior, it
+While that is a personified reading of the network behavior, it
 represents the intuition behind the functionality well. The shape
 of the network probability distribution turns out to be fairly
 important. While it might sound desirable to have a highly
@@ -152,13 +151,13 @@ backward in time, with some decay, to associate the earlier
 action with the end result. This modified reward is called *Advantage*
 and serves as a signal to guide the adjustment of the policy.
 
-With all the data obtained from a rollout, the network can then
+With all the data obtained from a rollout, the network can
 modify the policy based on the results. Since the advantage
 represents some reward quantity at each time step, the network can
 encourage or discourage each action it took based on the advantage
-at that step, and since the network outputs probabilities this
+and since the network outputs probabilities this
 will naturally shift the likelihood of other actions. This makes
-the network smoother, as updating the policy slowly causes an
+the network updates smoother, as updating the policy slowly causes an
 update of the output distribution.
 
 The actual act of training at each step takes the state the network
@@ -178,7 +177,7 @@ as the negative propagation will decay overtime.
 This is approach changes the policy overtime to reflect the rewards
 obtained from the environment. In some sense this approach can
 be relatively naive as it will discourage states that are temporally
-proximate to undesirable states, without regard for the action that
+proximate to undesirable states without regard for the action that
 caused the punishment in the first place. It may be possible that
 every action leading up to a failure was a good choice with the
 exception of the final action, yet they will all be discouraged.
@@ -209,13 +208,13 @@ Remember that the Critic, on some level, can be seen as a model of the
 environment, albeit, on that is solely concerned with expected reward.
 While the policy is a model of the environment concerned with
 probability distributions based on the input observation. Since, both
-learn from the same rollout data, they can be considered tandem
-models.
+learn from the same rollout data, they are both models of the same
+space.
 
-This means that when we encounter an error in the critic, it means
+When we encounter an error in the critic, it means
 our model of the environment is off and that we should modify
 the policy based on the error. Suppose that the critic has
-a positive error, meaning that the critic underestimated the value
+a positive error. This means that the critic underestimated the value
 of a given state. Under these circumstances we would want the agent
 to make the associated action more probable. Similarly, when the
 critic overestimates the value of a state---producing a negative
@@ -224,10 +223,10 @@ action since it may be erroneously high.
 
 This is also subtly different from the policy gradient approach with
 regard to negative states. A policy gradient will always naively
-avoid negative states. An actor-critic approach behaves slightly
-differently. Consider a state that gives some negative reward where
-the critic has vastly overestimated the magnitude of the negative
-reward. This will result in a positive error meaning the action
+avoid negative states. An actor-critic approach may actually encourage
+actions from negative states. Consider a state that gives some negative
+reward where the critic has vastly overestimated the magnitude of the
+negative reward. This will result in a positive error meaning the action
 taken to this negative state would actually be encouraged.
 
 At first brush this might seem quite strange, why would we encourage
@@ -295,11 +294,11 @@ space with a relatively simple goal, balance a pole on the
 cart without it falling over for an extended period of time.
 
 This didn't actually even require any machine learning, as we can
-create a simple single layer network and randomly intialze the weight
+create a simple single layer network and randomly initialize the weight
 matrix until a solution was found. Given that the weight matrix
-contained only 16 elements, this was easily done and a solution
+contained only 4 elements, this was easily done and a solution
 could be found within seconds, often taking fewer than 2000
-initializations.
+initializations to obtain a perfect score.
 
 ![Randomly Initialized Cartpole](assets/brutepole.gif)
 
@@ -455,5 +454,5 @@ The handler class in the notebooks can handle saving and loading
 the model so that trained versions may be retrieved and there is
 documentation regarding their use within the notebooks themselves.
 
-In general the notebooks are heavily commented to make their
+In general, the notebooks are heavily commented to make their
 use more intuitive and clear.

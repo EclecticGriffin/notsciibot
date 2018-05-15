@@ -246,7 +246,7 @@ that would be ignored by the policy gradient.
 This is the value of the actor-critic approach, because there are
 two models of the environment, errors in our expectation can be
 used to adjust our policy to more meaningfully match what the
-environmental state and make a more effective traversal of it.
+environmental feedback.
 
 #### A problem of exploration
 By now you might have realized an issue with all the described
@@ -257,7 +257,7 @@ particularly challenging. In order for a network, either value- or
 policy-based, to learn of a new better path, it must first stumble
 onto the path. This means that while there may be a far better policy
 available, the network may never encounter it because it is too far
-away of inaccessible.
+away to be inaccessible.
 
 It may help to visualize the network as wandering a hilly environment
 in the fog, searching for the highest place. It can't make big jumps
@@ -355,7 +355,7 @@ to restrict all possible paths until the agent is forced to choose
 the correct one (a la Asimov's Foundation) which is not feasible
 in any complicated environment.
 
-Given, the tendency of the policy gradients to get trapped in a
+Given the tendency of the policy gradients to get trapped in a
 local optima, we decided to test actor-critic methods on a simpler
 environment
 
@@ -367,7 +367,7 @@ switch environments if needed.
 
 In the process of doing this we discovered a series of different ways
 to approach training, for one the critic network could be made
-to train almost continuously by making estimates at each time step
+to train continuously by making estimates at each time step
 about what it believed the total reward of the entire episode to be,
 which produced dynamic behavior in real time. This was encouraging
 as the lander would rapidly seem to develop a good baseline policy,
@@ -389,7 +389,7 @@ all other actions was reduced to near zero.
 
 ![fire single thruster](assets/stupid_robot.gif)
 
-This immediately made clear the utility of adding entropy encouragement.
+This is where adding entropy encouragement became important.
 This changed the network behavior significantly and often enabled
 it to escape or avoid these sorts of local optima; however, the
 agent, while often close to desired behavior, would occasionally
@@ -413,14 +413,14 @@ returning to the more complex breakout environment.
 
 The results, while disappointing are an excellent demonstration of
 the various challenges associated with RL. In general, it's hard
-to know what to do, even when using a given approach. There are
+to know what to do, even when using a common approach. There are
 many hyperparameters that affect the way the agent searches the
-policy space with little indication of how to set them. If entropy
+policy space with little indication of how they should be set. If entropy
 is encouraged too much the agent is effectively random, but if
 it is not encouraged enough the agent falls into local minima. If
 finding the goldilocks zone for entropy isn't challenging enough,
 then there are a myriad of ways that the network could be structured
-and loss computed all of which ultimately change the search
+and the loss computed, all of which ultimately change the search
 functionality.
 
 With limited resources and little direction we were effectively

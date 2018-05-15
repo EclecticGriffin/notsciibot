@@ -87,32 +87,32 @@ Deep Q-Networks attempt to solve the problem of shortsighted, greedy
 actions and can be made deterministic or semi-stochastic as one
 sees fit. In essence, a Q-Network propagates rewards backward in time
 to try to associate actions that have low immediate rewards with later
-states that produce high reward to give the agent from "foresight".
+states that produce high reward to give the agent some "foresight".
 
 In practice, as demonstrated with the Atari environments, this can be
-quite effective, as long as the agent is encouraged to explore
+quite effective as long as the agent is encouraged to explore
 the environment to gain enough intuition about the reward space.
 
-Note however, that this once more does not dictate a policy. The
+Note, however, that this once more does not dictate a policy. The
 natural policy to take from a Q-Network would be some form of
 epsilon-greedy or perhaps a deterministic greedy policy, and provided
 robust reward and state information this could be quite successful;
 however, it is not necessarily perfect.
 
-Because the network is learning the reward function, rather than
+Because the network is learning the reward function rather than
 policy, there can be issues with state aliasing. State aliasing
 is when two or more states effectively appear the same to the
-network, possibly due to limitations with the observation space,
+network, possibly due to limitations with the observation space
 while representing distinct environmental states. With a
 deterministic policy, it is possible for an agent to get stuck in
-a loop due to aliased states, or simply make undesirable
+a loop due to aliased states or simply make undesirable
 decisions. This can in part be solved by semi-stochastic derived
 policies; however, given the various considerations needed to
 derive a useful policy, one might consider whether or not it
 would be better to have the network learn a policy rather than
 the reward function.
 
-This is the philosophy behind policy-based methods, rather than
+This is the philosophy behind policy-based methods. Rather than
 learn the reward and derive a policy from it, policy-based methods
 iterate on the policy itself based on the reward signal from the
 environment.
@@ -166,11 +166,11 @@ that step), and the advantage. From these the network will encourage
 the action taken based on some modulation by the advantage. In
 English this means that the network will encourage the action based
 on the magnitude and direction of the advantage. A strong negative
-advantage---indicating an action in part responsible for an
-undesirable state---will be discouraged and an action associated
+advantage — indicating an action in part responsible for an
+undesirable state — will be discouraged and an action associated
 with a strong positive advantage will be encouraged. This means
 that, due to temporal propagation, all actions near the end of
-an episode---where presumably a negative action was encountered---will
+an episode — where presumably a negative action was encountered — will
 be discouraged while those near the beginning will likely be encouraged
 as the negative propagation will decay overtime.
 
@@ -217,8 +217,8 @@ the policy based on the error. Suppose that the critic has
 a positive error. This means that the critic underestimated the value
 of a given state. Under these circumstances we would want the agent
 to make the associated action more probable. Similarly, when the
-critic overestimates the value of a state---producing a negative
-advantage---we would want to reduce the probability of the taken
+critic overestimates the value of a state — producing a negative
+advantage — we would want to reduce the probability of the taken
 action since it may be erroneously high.
 
 This is also subtly different from the policy gradient approach with
@@ -327,8 +327,8 @@ In general the agent often performed worse than simply moving at random,
 though adding additional punishments resulted in slightly different
 behavior. However, invariably, the agent fell into a local optima
 that resulted in not playing the game. Since the agent is punished
-when it misses the ball---which occurs far more frequently than
-breaking a brick---the policy agent naturally avoids circumstances
+when it misses the ball — which occurs far more frequently than
+breaking a brick — the policy agent naturally avoids circumstances
 where it is possible to miss the ball. In this case, the path of
 least resistance, that is the nearest policy, is one that simply
 doesn't interact with the ball at all and causes it never to be

@@ -298,8 +298,10 @@ This didn't actually even require any machine learning, as we can
 create a simple single layer network and randomly intialze the weight
 matrix until a solution was found. Given that the weight matrix
 contained only 16 elements, this was easily done and a solution
-could be found within 20 seconds taking fewer than 2000
+could be found within seconds, often taking fewer than 2000
 initializations.
+
+![Randomly Initialized Cartpole](assets/brutepole.gif)
 
 We also tested the basic policy gradient approach on the environment
 which did find a solution, though overall seemed to be less
@@ -314,7 +316,10 @@ however, more often than not the agent would converge to taking
 no actions whatsoever and would typically hug the corners of the
 screen.
 
-We experimented with adding additional punshments to try to encourage
+###### Trained Agent
+![Trained Breakout](assets/trained_breakout.gif)
+
+We experimented with adding additional punishments to try to encourage
 it to stay in the center, but this usually resulted in an
 aggressively jittery agent that also still hugged the corners of the
 screen.
@@ -336,6 +341,9 @@ the agent also wants to avoid early termination caused by not
 playing the game, it still cannot find the path to a state that
 allows for actual play and will oscillate between sitting in the corner
 and moving around haphazardly, all without firing the ball.
+
+###### Untrained Agent
+![Untrained Breakout](assets/untrained_breakout.gif)
 
 In theory it may be possible to design enough punishments to cause
 the agent to play the game properly, though their magnitude and
